@@ -1,15 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Box, Grid, Typography, Fade } from "@material-ui/core";
-import logo from "../../logo.svg";
-
-import * as pkg from "../../../package.json";
 
 import "./AirConditioner.scss";
 import { useAppSelector } from "../../app/hooks";
 
 import { AcMode, selectTemperature } from "./acSlice";
-import { adsenseLink, jumpToAdsense } from "../adsense";
 
 const acColor = {
   border: "#e0e0e0",
@@ -24,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottomRightRadius: 20,
   },
   acDisplay: {
-    textShadow: "0px 0px 2px rgba(0, 0, 0, 0.3)",
+    textShadow: "0px 0px 2px rgba(0, 0, 0, 0.3)"
     // visibility: (props) => props.visibility,
   },
   acLogo: {
@@ -89,25 +85,6 @@ const AcDisplay = React.forwardRef((props: { mode: AcMode }, ref) => {
   );
 });
 
-/**
- * 空调 Logo
- * @param props
- */
-function AcLogo(props: any) {
-  return (
-    // <Box align="center" mt={12}>
-    <Box textAlign="center" mt={12}>
-      <a
-        href={pkg.repository.url}
-        title={pkg.description}
-        target="_blank"
-        rel="noreferrer noopener"
-      >
-        <img className={props.className} src={logo} alt="logo" />
-      </a>
-    </Box>
-  );
-}
 
 /**
  * 出风口线
@@ -238,44 +215,6 @@ function EnergyLabel(props: any) {
   );
 }
 
-/**
- * 节能产品惠民工程
- */
-function EnergySavingLabel() {
-  return (
-    <a
-      className="adsense-link"
-      href={adsenseLink}
-      target="_blank"
-      onClick={() => {
-        jumpToAdsense();
-      }}
-    >
-      <div className="energy-saving-label">
-        <div className="energy-saving-label_bg">
-          <span className="energy-saving-label_title">
-            节能产品&nbsp;&nbsp;惠民工程
-          </span>
-          {/* <img
-            className="adsense-logo"
-            src="/images/ximalaya-logo.png"
-            alt="夏日清凉"
-          /> */}
-          <span className="adsense-logo" title="夏日清凉">🍉</span>
-          <span className="energy-saving-label_description">
-            推广上限价格：XXXX 元
-          </span>
-          <span className="energy-saving-label_description">
-            政府补助金额：XXXX 元
-          </span>
-          <span className="energy-saving-label_description">
-            补助上限价格：XXXX 元
-          </span>
-        </div>
-      </div>
-    </a>
-  );
-}
 
 /**
  * 风特效
@@ -316,11 +255,9 @@ export default function AirConditioner(props: {
         <Fade in={props.status}>
           <AcDisplay mode={props.mode} />
         </Fade>
-        <AcLogo className={classes.acLogo} />
         <AirOutlet />
         <AcStatus status={props.status} />
         <EnergyLabel className={classes.energyLabel} titleLength={6} />
-        {process.env.REACT_APP_DISABLE_ADSENSE ? null : <EnergySavingLabel />}
       </AcBorder>
       <Fade in={props.status} timeout={{ enter: 2500, exit: 1500 }}>
         <WindEffect />
